@@ -140,3 +140,11 @@ dmypy.json
 
 static/
 media/
+
+# Others
+node_modules
+*.bak
+*.copy
+*.sqlite3
+*.working_dev
+docker-compose.yml
