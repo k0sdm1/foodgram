@@ -1,6 +1,6 @@
 from django.contrib import admin
-
 from django.db.models import Count
+
 from receipts.models import Receipt, IngredientInRecipe
 
 

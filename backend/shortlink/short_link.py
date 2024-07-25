@@ -12,13 +12,14 @@ ALLOWED_CHARS = 'ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz234567890'
 
 
 def get_random(tries=0) -> str:
-    lengtH = LINK_LENGTH + tries
-    return ''.join(choice(ALLOWED_CHARS) for _ in range(lengtH))
+    length = LINK_LENGTH + tries
+    return ''.join(choice(ALLOWED_CHARS) for _ in range(length))
 
 
 def get_or_create_short_link(url: str) -> str:
-    """Создает или получает объект короткой ссылки по полному url
-    и возвращает короткую ссылку."""
+    """Создает или получает объект короткой ссылки по полному url.
+    Возвращает короткую ссылку.
+    """
     for tries in range(LINK_CREATION_ATTEMPTS):
         try:
             short = get_random(tries)

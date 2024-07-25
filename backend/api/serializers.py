@@ -5,12 +5,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.core.validators import EmailValidator
 from django.core.files.base import ContentFile
-from django.db import IntegrityError
 from django.forms import ValidationError
-from django.shortcuts import get_object_or_404
 from rest_framework import serializers
-from rest_framework.response import Response
-from rest_framework.validators import UniqueTogetherValidator
 
 from receipts.models import (
     Tag,
@@ -163,7 +159,7 @@ class MyUserSerializer(serializers.ModelSerializer):
         return user
 
 
-class UserAvatarSerializer(serializers.ModelSerializer): # MyUserSerializer
+class UserAvatarSerializer(serializers.ModelSerializer):
     """Сериализатор для обработки аватара пользователя."""
 
     avatar = Base64ImageField(required=False, allow_null=True)

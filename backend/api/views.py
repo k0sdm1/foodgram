@@ -11,7 +11,6 @@ from rest_framework import viewsets, generics
 from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
-from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import (
     IsAuthenticated,
     AllowAny,
@@ -66,7 +65,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthorOrReadOnly,)
     filter_backends = (DjangoFilterBackend, )
     filterset_class = RecipesFilter
-    filterset_fields = ('author', 'tags', 'is_favorited', 'is_in_shopping_cart')
+    filterset_fields = (
+        'author', 'tags', 'is_favorited', 'is_in_shopping_cart')
     pagination_class = LimitPagination
 
     def get_serializer_context(self):
@@ -274,8 +274,8 @@ class UserViewSet(djoser_views.UserViewSet):
 
 
 class ShoppingListDownload(generics.ListAPIView):
-    """Возвращает вайл со списком покупок, PDF для Linux 
-    и HTML для остальных платформ."""
+    """Возвращает вайл со списком покупок.
+    PDF для Linux и HTML для остальных платформ."""
 
     serializer_class = IngredientInRecipeSerializer
     permission_classes = (IsAuthenticated, )

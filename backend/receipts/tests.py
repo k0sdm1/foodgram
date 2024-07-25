@@ -7,8 +7,8 @@ from rest_framework.test import APIClient
 
 class FoodgramAPITestCase(TestCase):
     def setUp(self):
-        User = get_user_model()
-        self.user = User.objects.create_user(username='auth_user')
+        user = get_user_model()
+        self.user = user.objects.create_user(username='auth_user')
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
 

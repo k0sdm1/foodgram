@@ -102,7 +102,7 @@ AVALIABLE_DBS = (
     }
 )
 
-DATABASES = { 
+DATABASES = {
     'default': AVALIABLE_DBS[int(USED_DB)]
 }
 
