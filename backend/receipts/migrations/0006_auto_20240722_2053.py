@@ -10,18 +10,32 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('receipts', '0005_auto_20240715_1454'),
+        ("receipts", "0005_auto_20240715_1454"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='follow',
-            name='following',
-            field=models.ForeignKey(help_text='Обязательное поле', on_delete=django.db.models.deletion.CASCADE, related_name='followings', to=settings.AUTH_USER_MODEL, verbose_name='На кого подписан'),
+            model_name="follow",
+            name="following",
+            field=models.ForeignKey(
+                help_text="Обязательное поле",
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="followings",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="На кого подписан",
+            ),
         ),
         migrations.AlterField(
-            model_name='ingredientinrecipe',
-            name='amount',
-            field=models.IntegerField(help_text='Значение должно быть ≥ 1', validators=[django.core.validators.MinValueValidator(1, 'Значение должно быть ≥ 1')], verbose_name='Количество ингредиента в рецепте'),
+            model_name="ingredientinrecipe",
+            name="amount",
+            field=models.IntegerField(
+                help_text="Значение должно быть ≥ 1",
+                validators=[
+                    django.core.validators.MinValueValidator(
+                        1, "Значение должно быть ≥ 1"
+                    )
+                ],
+                verbose_name="Количество ингредиента в рецепте",
+            ),
         ),
     ]

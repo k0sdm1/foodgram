@@ -8,12 +8,12 @@ from shortlink.exceptions import UnableToCreateLink, ShortLinkDoesNotExist
 
 LINK_LENGTH = 7
 LINK_CREATION_ATTEMPTS = 3
-ALLOWED_CHARS = 'ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz234567890'
+ALLOWED_CHARS = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz234567890"
 
 
 def get_random(tries=0) -> str:
     length = LINK_LENGTH + tries
-    return ''.join(choice(ALLOWED_CHARS) for _ in range(length))
+    return "".join(choice(ALLOWED_CHARS) for _ in range(length))
 
 
 def get_or_create_short_link(url: str) -> str:
@@ -31,8 +31,7 @@ def get_or_create_short_link(url: str) -> str:
             return link_obj.short_link
         except IntegrityError:
             continue
-    raise UnableToCreateLink(
-        'Не удалось создать уникальную ссылку.')
+    raise UnableToCreateLink("Не удалось создать уникальную ссылку.")
 
 
 def get_full_link(link: str) -> str:
@@ -40,5 +39,5 @@ def get_full_link(link: str) -> str:
     try:
         url = ShortLink.objects.get(short_link__exact=link)
     except ShortLink.DoesNotExist:
-        raise ShortLinkDoesNotExist('Такой короткой ссылки не существует.')
+        raise ShortLinkDoesNotExist("Такой короткой ссылки не существует.")
     return url.full_url

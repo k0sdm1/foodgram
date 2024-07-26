@@ -7,33 +7,33 @@ from receipts.models import Receipt, IngredientInRecipe
 class IngredientInRecipeInline(admin.TabularInline):
     model = IngredientInRecipe
     extra = 1
-    autocomplete_fields = ['ingredient']
-    fields = ['ingredient', 'amount']
+    autocomplete_fields = ["ingredient"]
+    fields = ["ingredient", "amount"]
 
 
 class ReceiptAdmin(admin.ModelAdmin):
     inlines = (IngredientInRecipeInline,)
     list_display = (
-        'name',
-        'id',
-        'author',
-        'short_text',
-        'cooking_time',
-        'image',
-        'total_favorites'
+        "name",
+        "id",
+        "author",
+        "short_text",
+        "cooking_time",
+        "image",
+        "total_favorites",
     )
-    readonly_fields = ('total_favorites',)  # Make total_favorites read-only
+    readonly_fields = ("total_favorites",)  # Make total_favorites read-only
     fields = (
-        'name',
-        'author',
-        'text',
-        'cooking_time',
-        'image',
-        'tags',
-        'total_favorites'
+        "name",
+        "author",
+        "text",
+        "cooking_time",
+        "image",
+        "tags",
+        "total_favorites",
     )
-    search_fields = ('name', 'authot__username')
-    filter_horizontal = ('tags',)
+    search_fields = ("name", "authot__username")
+    filter_horizontal = ("tags",)
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -43,12 +43,15 @@ class ReceiptAdmin(admin.ModelAdmin):
         return instance.favorites_count
 
     def short_text(self, instance):
-        return ((instance.text[:50] + '...')
-                if len(instance.text) > 50 else instance.text)
+        return (
+            (instance.text[:50] + "...")
+            if len(instance.text) > 50
+            else instance.text
+        )
 
-    short_text.short_description = 'Описание'
-    total_favorites.short_description = 'Добавлено в избранное раз'
-    total_favorites.admin_order_field = 'favorites_count'
+    short_text.short_description = "Описание"
+    total_favorites.short_description = "Добавлено в избранное раз"
+    total_favorites.admin_order_field = "favorites_count"
 
 
 admin.site.register(Receipt, ReceiptAdmin)

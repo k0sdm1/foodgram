@@ -8,38 +8,32 @@ class IngredientsFilter(django_filters.FilterSet):
     """Класс фильтров для ингредиентов."""
 
     name = django_filters.CharFilter(
-        field_name='name', lookup_expr='istartswith')
-    # author = django_filters.CharFilter(
-    #     field_name='recipe__author', lookup_expr='iexact')
-    # year = django_filters.CharFilter(
-    #     field_name='year', lookup_expr='iexact')
-    # name = django_filters.CharFilter(
-    #     field_name='name', lookup_expr='iexact')
+        field_name="name", lookup_expr="istartswith"
+    )
 
     class Meta:
         model = Ingredient
-        fields = ('name',)
+        fields = ("name",)
 
 
 class RecipesFilter(django_filters.FilterSet):
     """Класс фильтров для рецептов."""
 
-    author = django_filters.CharFilter(
-        field_name='author_id')
+    author = django_filters.CharFilter(field_name="author_id")
     tags = django_filters.ModelMultipleChoiceFilter(
-        field_name='tags__slug',
-        to_field_name='slug',
+        field_name="tags__slug",
+        to_field_name="slug",
         queryset=Tag.objects.all(),
-        method='filter_tags'
+        method="filter_tags",
     )
-    is_favorited = django_filters.NumberFilter(
-        method='filter_is_favorited')
+    is_favorited = django_filters.NumberFilter(method="filter_is_favorited")
     is_in_shopping_cart = django_filters.NumberFilter(
-        method='filter_is_in_shopping_cart')
+        method="filter_is_in_shopping_cart"
+    )
 
     class Meta:
         model = Receipt
-        fields = ('author', 'tags', 'is_favorited', 'is_in_shopping_cart')
+        fields = ("author", "tags", "is_favorited", "is_in_shopping_cart")
 
     def filter_tags(self, queryset, name, value):
         """Фильтр для тэгов с использованием OR логики."""

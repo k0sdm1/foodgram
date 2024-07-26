@@ -15,46 +15,48 @@ class MyUserChangeForm(UserChangeForm):
 class MyUserAdmin(UserAdmin):
     form = MyUserChangeForm
 
-    list_display = (
-        'username',
-        'email',
-        'first_name',
-        'last_name',
-        'avatar'
-    )
+    list_display = ("username", "email", "first_name", "last_name", "avatar")
     fieldsets = (
-        (('Основная информация'), {
-            'fields': (
-                'username',
-                'email',
-                'first_name',
-                'last_name',
-                'avatar'
-            ),
-        }),
-        (('Разрешения'), {
-            'fields': (
-                'is_active',
-                'is_staff',
-                'is_superuser',
-            ),
-        }),
-        (('Даты'), {'fields': ('last_login', 'date_joined')}),
+        (
+            ("Основная информация"),
+            {
+                "fields": (
+                    "username",
+                    "email",
+                    "first_name",
+                    "last_name",
+                    "avatar",
+                ),
+            },
+        ),
+        (
+            ("Разрешения"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                ),
+            },
+        ),
+        (("Даты"), {"fields": ("last_login", "date_joined")}),
     )
     add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': (
-                'username',
-                'email',
-                'first_name',
-                'last_name',),
-        }),
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "username",
+                    "email",
+                    "first_name",
+                    "last_name",
+                ),
+            },
+        ),
     )
 
-    search_fields = (
-        'username', 'email'
-    )
+    search_fields = ("username", "email")
 
 
 admin.site.register(User, MyUserAdmin)

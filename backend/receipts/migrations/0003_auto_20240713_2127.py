@@ -8,26 +8,56 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('receipts', '0002_initial'),
+        ("receipts", "0002_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='IngredientInRecipe',
+            name="IngredientInRecipe",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.IntegerField(help_text='Значение должно быть ≥ 1', validators=[django.core.validators.MinValueValidator(1)], verbose_name='Количество ингредиента в рецепте')),
-                ('ingredient', models.ForeignKey(help_text='Значение должно быть ≥ 1', on_delete=django.db.models.deletion.CASCADE, to='receipts.ingredient', verbose_name='Ингредиент в рецепте')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "amount",
+                    models.IntegerField(
+                        help_text="Значение должно быть ≥ 1",
+                        validators=[
+                            django.core.validators.MinValueValidator(1)
+                        ],
+                        verbose_name="Количество ингредиента в рецепте",
+                    ),
+                ),
+                (
+                    "ingredient",
+                    models.ForeignKey(
+                        help_text="Значение должно быть ≥ 1",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="receipts.ingredient",
+                        verbose_name="Ингредиент в рецепте",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'ингредиент в рецепте',
-                'verbose_name_plural': 'Ингредиенты в рецепте',
-                'ordering': ('id',),
+                "verbose_name": "ингредиент в рецепте",
+                "verbose_name_plural": "Ингредиенты в рецепте",
+                "ordering": ("id",),
             },
         ),
         migrations.AlterField(
-            model_name='receipt',
-            name='ingredients',
-            field=models.ManyToManyField(help_text='Обязательно к заполнению', related_name='recipes', to='receipts.IngredientInRecipe', verbose_name='Ингредиенты'),
+            model_name="receipt",
+            name="ingredients",
+            field=models.ManyToManyField(
+                help_text="Обязательно к заполнению",
+                related_name="recipes",
+                to="receipts.IngredientInRecipe",
+                verbose_name="Ингредиенты",
+            ),
         ),
     ]

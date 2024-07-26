@@ -7,23 +7,24 @@ from api.views import (
     IngredientRetrieveList,
     UserViewSet,
     RecipeViewSet,
-    ShoppingListDownload)
+    ShoppingListDownload,
+)
 
 
 router = DefaultRouter()
-router.register('tags', TagViewSet)
-router.register('recipes', RecipeViewSet, basename='recipes')
-router.register('ingredients', IngredientRetrieveList)
-router.register(r'users', UserViewSet)
+router.register("tags", TagViewSet)
+router.register("recipes", RecipeViewSet, basename="recipes")
+router.register("ingredients", IngredientRetrieveList)
+router.register(r"users", UserViewSet)
 
 urlpatterns = [
-    path('recipes/download_shopping_cart/', ShoppingListDownload.as_view()),
-    path('', include(router.urls)),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.authtoken')),
+    path("recipes/download_shopping_cart/", ShoppingListDownload.as_view()),
+    path("", include(router.urls)),
+    path("auth/", include("djoser.urls")),
+    path("auth/", include("djoser.urls.authtoken")),
     path(
-        'docks/',
-        TemplateView.as_view(template_name='redoc.html'),
-        name='redoc'
+        "docks/",
+        TemplateView.as_view(template_name="redoc.html"),
+        name="redoc",
     ),
 ]

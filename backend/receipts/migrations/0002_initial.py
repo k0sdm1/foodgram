@@ -10,61 +10,115 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('receipts', '0001_initial'),
+        ("receipts", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='shoppinglist',
-            name='user',
-            field=models.ForeignKey(help_text='Обязательное поле', on_delete=django.db.models.deletion.CASCADE, related_name='shopping_lists', to=settings.AUTH_USER_MODEL, verbose_name='Владелец списка покупок'),
+            model_name="shoppinglist",
+            name="user",
+            field=models.ForeignKey(
+                help_text="Обязательное поле",
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="shopping_lists",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Владелец списка покупок",
+            ),
         ),
         migrations.AddField(
-            model_name='receipt',
-            name='author',
-            field=models.ForeignKey(help_text='Обязательное поле', on_delete=django.db.models.deletion.CASCADE, related_name='recipes', to=settings.AUTH_USER_MODEL, verbose_name='Автор'),
+            model_name="receipt",
+            name="author",
+            field=models.ForeignKey(
+                help_text="Обязательное поле",
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="recipes",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Автор",
+            ),
         ),
         migrations.AddField(
-            model_name='receipt',
-            name='ingredients',
-            field=models.ManyToManyField(help_text='Обязательно к заполнению', related_name='recipes', to='receipts.Ingredient', verbose_name='Ингредиенты'),
+            model_name="receipt",
+            name="ingredients",
+            field=models.ManyToManyField(
+                help_text="Обязательно к заполнению",
+                related_name="recipes",
+                to="receipts.Ingredient",
+                verbose_name="Ингредиенты",
+            ),
         ),
         migrations.AddField(
-            model_name='receipt',
-            name='tags',
-            field=models.ManyToManyField(help_text='Обязательно к заполнению', related_name='recipes', to='receipts.Tag', verbose_name='Тэги'),
+            model_name="receipt",
+            name="tags",
+            field=models.ManyToManyField(
+                help_text="Обязательно к заполнению",
+                related_name="recipes",
+                to="receipts.Tag",
+                verbose_name="Тэги",
+            ),
         ),
         migrations.AddField(
-            model_name='follow',
-            name='following',
-            field=models.ForeignKey(help_text='Обязательное поле', on_delete=django.db.models.deletion.CASCADE, related_name='followings', to=settings.AUTH_USER_MODEL, verbose_name='Рецепт'),
+            model_name="follow",
+            name="following",
+            field=models.ForeignKey(
+                help_text="Обязательное поле",
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="followings",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Рецепт",
+            ),
         ),
         migrations.AddField(
-            model_name='follow',
-            name='user',
-            field=models.ForeignKey(help_text='Обязательное поле', on_delete=django.db.models.deletion.CASCADE, related_name='followers', to=settings.AUTH_USER_MODEL, verbose_name='Пользователь'),
+            model_name="follow",
+            name="user",
+            field=models.ForeignKey(
+                help_text="Обязательное поле",
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="followers",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Пользователь",
+            ),
         ),
         migrations.AddField(
-            model_name='favorite',
-            name='receipt',
-            field=models.ForeignKey(help_text='Обязательное поле', on_delete=django.db.models.deletion.CASCADE, related_name='favorites', to='receipts.receipt', verbose_name='Рецепт'),
+            model_name="favorite",
+            name="receipt",
+            field=models.ForeignKey(
+                help_text="Обязательное поле",
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="favorites",
+                to="receipts.receipt",
+                verbose_name="Рецепт",
+            ),
         ),
         migrations.AddField(
-            model_name='favorite',
-            name='user',
-            field=models.ForeignKey(help_text='Обязательное поле', on_delete=django.db.models.deletion.CASCADE, related_name='favorites', to=settings.AUTH_USER_MODEL, verbose_name='Пользователь'),
+            model_name="favorite",
+            name="user",
+            field=models.ForeignKey(
+                help_text="Обязательное поле",
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="favorites",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Пользователь",
+            ),
         ),
         migrations.AddConstraint(
-            model_name='shoppinglist',
-            constraint=models.UniqueConstraint(fields=('user', 'receipt'), name='user_receipt_in_shopping_unique'),
+            model_name="shoppinglist",
+            constraint=models.UniqueConstraint(
+                fields=("user", "receipt"),
+                name="user_receipt_in_shopping_unique",
+            ),
         ),
         migrations.AddConstraint(
-            model_name='follow',
-            constraint=models.UniqueConstraint(fields=('user', 'following'), name='user_following_unique'),
+            model_name="follow",
+            constraint=models.UniqueConstraint(
+                fields=("user", "following"), name="user_following_unique"
+            ),
         ),
         migrations.AddConstraint(
-            model_name='favorite',
-            constraint=models.UniqueConstraint(fields=('user', 'receipt'), name='user_receipt_in_favorites_unique'),
+            model_name="favorite",
+            constraint=models.UniqueConstraint(
+                fields=("user", "receipt"),
+                name="user_receipt_in_favorites_unique",
+            ),
         ),
     ]

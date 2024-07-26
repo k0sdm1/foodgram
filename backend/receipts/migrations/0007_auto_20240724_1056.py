@@ -7,17 +7,29 @@ import django.db.models.expressions
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('receipts', '0006_auto_20240722_2053'),
+        ("receipts", "0006_auto_20240722_2053"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='receipt',
-            name='image',
-            field=models.ImageField(default=None, help_text='Обязательное поле', null=True, upload_to='recipes/images/', verbose_name='Изображение блюда'),
+            model_name="receipt",
+            name="image",
+            field=models.ImageField(
+                default=None,
+                help_text="Обязательное поле",
+                null=True,
+                upload_to="recipes/images/",
+                verbose_name="Изображение блюда",
+            ),
         ),
         migrations.AddConstraint(
-            model_name='follow',
-            constraint=models.CheckConstraint(check=models.Q(('user', django.db.models.expressions.F('following')), _negated=True), name='not_same'),
+            model_name="follow",
+            constraint=models.CheckConstraint(
+                check=models.Q(
+                    ("user", django.db.models.expressions.F("following")),
+                    _negated=True,
+                ),
+                name="not_same",
+            ),
         ),
     ]

@@ -6,22 +6,34 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('receipts', '0004_auto_20240713_2209'),
+        ("receipts", "0004_auto_20240713_2209"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='receipt',
-            options={'ordering': ('publish_time',), 'verbose_name': 'рецепт', 'verbose_name_plural': 'Рецепты'},
+            name="receipt",
+            options={
+                "ordering": ("publish_time",),
+                "verbose_name": "рецепт",
+                "verbose_name_plural": "Рецепты",
+            },
         ),
         migrations.AddField(
-            model_name='receipt',
-            name='publish_time',
-            field=models.DateTimeField(auto_now_add=True, default='2024-07-15 10:00', help_text='Заполняется автоматически', verbose_name='Время публикации'),
+            model_name="receipt",
+            name="publish_time",
+            field=models.DateTimeField(
+                auto_now_add=True,
+                default="2024-07-15 10:00",
+                help_text="Заполняется автоматически",
+                verbose_name="Время публикации",
+            ),
             preserve_default=False,
         ),
         migrations.AddConstraint(
-            model_name='ingredientinrecipe',
-            constraint=models.UniqueConstraint(fields=('recipe', 'ingredient'), name='ingredient_in_recipe_unique'),
+            model_name="ingredientinrecipe",
+            constraint=models.UniqueConstraint(
+                fields=("recipe", "ingredient"),
+                name="ingredient_in_recipe_unique",
+            ),
         ),
     ]

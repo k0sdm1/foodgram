@@ -7,16 +7,22 @@ import django.db.models.expressions
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('receipts', '0007_auto_20240724_1056'),
+        ("receipts", "0007_auto_20240724_1056"),
     ]
 
     operations = [
         migrations.RemoveConstraint(
-            model_name='follow',
-            name='not_same',
+            model_name="follow",
+            name="not_same",
         ),
         migrations.AddConstraint(
-            model_name='follow',
-            constraint=models.CheckConstraint(check=models.Q(('user', django.db.models.expressions.F('following')), _negated=True), name='user_following_not_same'),
+            model_name="follow",
+            constraint=models.CheckConstraint(
+                check=models.Q(
+                    ("user", django.db.models.expressions.F("following")),
+                    _negated=True,
+                ),
+                name="user_following_not_same",
+            ),
         ),
     ]

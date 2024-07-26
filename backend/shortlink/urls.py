@@ -4,5 +4,5 @@ from shortlink import views
 
 
 urlpatterns = [
-    path('<link>/', views.reverse_short),
+    path("<link>/", views.reverse_short),
 ]

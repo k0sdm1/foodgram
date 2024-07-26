@@ -4,21 +4,20 @@ from receipts.models import Tag, Ingredient, ShoppingList, Follow, Favorite
 
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'slug',
-        'id'
+    list_display = ("name", "slug", "id")
+    search_fields = (
+        "name",
+        "slug",
     )
-    search_fields = ('name', 'slug',)
 
 
 class IngredientAdmin(admin.ModelAdmin):
     list_display = (
-        'name',
-        'measurement_unit',
-        'id',
+        "name",
+        "measurement_unit",
+        "id",
     )
-    search_fields = ('name',)
+    search_fields = ("name",)
 
 
 admin.site.register(ShoppingList)

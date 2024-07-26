@@ -3,7 +3,7 @@ from io import BytesIO
 
 from django.http import HttpResponse
 
-if platform.system() == 'Linux':
+if platform.system() == "Linux":
     from weasyprint import HTML
 
 
@@ -52,7 +52,7 @@ def generate_html(result_list):
 
 def generate_file(html_content):
     """Возвращает PDF файл или html текст в зависимости от платформы."""
-    if platform.system() == 'Linux':
+    if platform.system() == "Linux":
         pdf_file = BytesIO()
         HTML(string=html_content).write_pdf(pdf_file)
         pdf_file.seek(0)
@@ -62,12 +62,14 @@ def generate_file(html_content):
 
 def get_file(file):
     """Возвращает ответ с файлом PDF или HTML в зависимости от платформы."""
-    if platform.system() == 'Linux':
-        response = HttpResponse(file, content_type='application/pdf')
-        response['Content-Disposition'] = (
-            'attachment; filename="shopping_list.pdf"')
+    if platform.system() == "Linux":
+        response = HttpResponse(file, content_type="application/pdf")
+        response["Content-Disposition"] = (
+            'attachment; filename="shopping_list.pdf"'
+        )
         return response
-    response = HttpResponse(file, content_type='text/html')
-    response['Content-Disposition'] = (
-        'attachment; filename="shopping_list.html"')
+    response = HttpResponse(file, content_type="text/html")
+    response["Content-Disposition"] = (
+        'attachment; filename="shopping_list.html"'
+    )
     return response
