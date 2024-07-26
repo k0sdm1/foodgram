@@ -187,16 +187,15 @@ class UserViewSet(djoser_views.UserViewSet):
         if page:
             serializer = serializer_to_use(
                 context={"request": request},
-                instance=page,
-                many=True)
+                instance=page, many=True)
             return self.get_paginated_response(serializer.data)
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        serializer = serializer_to_use(queryset, many=True)
+        return self.get_paginated_response(serializer.data)
 
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(User.objects.all())
-        serializer = self.get_serializer().__class__
-        return self.pagination_for_query(request, queryset, serializer)
+        return self.pagination_for_query(
+            request=request, queryset=User.objects.all(),
+            serializer_to_use=self.get_serializer().__class__)
 
     @action(
         detail=False,
@@ -206,11 +205,10 @@ class UserViewSet(djoser_views.UserViewSet):
         permission_classes=(IsAuthenticated, )
     )
     def get_my_subscriptions(self, request):
-        current_subscriptions = User.objects.filter(
-            followings__user=request.user)
-        queryset = self.filter_queryset(current_subscriptions)
-        serializer = SubscribeUserSerializer
-        return self.pagination_for_query(request, queryset, serializer)
+        return self.pagination_for_query(
+            request=request,
+            queryset=User.objects.filter(followings__user=request.user).all(),
+            serializer_to_use=SubscribeUserSerializer)
 
     @action(
         detail=True,
