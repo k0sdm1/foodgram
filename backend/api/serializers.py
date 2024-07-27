@@ -11,7 +11,6 @@ from rest_framework import serializers
 from receipts.models import (
     Ingredient,
     IngredientInRecipe,
-    Follow,
     Tag,
     Receipt,
     MAX_COOKING_TIME,

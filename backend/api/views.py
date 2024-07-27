@@ -24,7 +24,6 @@ from api.shopping_list import generate_html, generate_file, get_file
 from api.serializers import (
     TagSerializer,
     IngredientSerializer,
-    IngredientInRecipeSerializer,
     RecipeSerializer,
     RecipeSerializerGetRequest,
     UserAvatarSerializer,
