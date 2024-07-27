@@ -76,7 +76,7 @@ class MyUserCreateSerializer(serializers.ModelSerializer):
                 f"{MAX_USERNAME_LENGTH} символов."
             )
         if username in FORBIDDEN_USERNAMES:
-            raise ValidationError(f'Запрещено использовать имя "{username}".')
+            raise ValidationError(f"Запрещено использовать имя '{username}'.")
         if not re.match(USERNAME_REGEX, username):
             raise ValidationError(
                 "Имя пользователя может содерджать только буквы, цифры, "
@@ -139,8 +139,8 @@ class MyUserSerializer(serializers.ModelSerializer):
             current_user = request.user
             if not current_user.is_authenticated:
                 return False
-            return Follow.objects.filter(
-                user=current_user, following=obj
+            return obj.followings.filter(
+                user=current_user
             ).exists()
         return False
 
@@ -157,7 +157,7 @@ class MyUserSerializer(serializers.ModelSerializer):
                 f"{MAX_USERNAME_LENGTH} символов."
             )
         if username in FORBIDDEN_USERNAMES:
-            raise ValidationError(f'Запрещено использовать имя "{username}".')
+            raise ValidationError(f"Запрещено использовать имя '{username}'.")
         if not re.match(USERNAME_REGEX, username):
             raise ValidationError(
                 "Имя пользователя может содерджать только буквы, цифры, "

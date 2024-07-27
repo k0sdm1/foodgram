@@ -311,7 +311,6 @@ class ShoppingListDownload(generics.ListAPIView):
     """Возвращает файл со списком покупок.
     PDF для Linux и HTML для остальных платформ."""
 
-    serializer_class = IngredientInRecipeSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
