@@ -306,7 +306,7 @@ class UserViewSet(djoser_views.UserViewSet):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class ShoppingListDownload(generics.ListAPIView):
+class ShoppingListDownload(generics.RetrieveAPIView):
     """Возвращает файл со списком покупок.
     PDF для Linux и HTML для остальных платформ."""
 
